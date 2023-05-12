@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -42,7 +43,7 @@ public class BeerController {
     }
 
     @PostMapping
-    public ResponseEntity<BeerDto> saveBeer(@RequestBody BeerDto beerDto) {
+    public ResponseEntity<BeerDto> saveBeer(@RequestBody @Validated BeerDto beerDto) {
         BeerDto newBeer = beerService.saveBeer(beerDto);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "api/v1/beer/" + newBeer.getId().toString());
@@ -50,7 +51,7 @@ public class BeerController {
     }
 
     @PutMapping
-    public ResponseEntity<BeerDto> updateBeer(@RequestBody BeerDto beerDto) {
+    public ResponseEntity<BeerDto> updateBeer(@RequestBody @Validated BeerDto beerDto) {
         beerService.updateBeer(beerDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
