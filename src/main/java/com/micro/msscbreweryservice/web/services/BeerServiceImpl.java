@@ -46,6 +46,8 @@ public class BeerServiceImpl implements BeerService {
     @Override
     public void deleteBeerById(UUID beerId) {
         log.debug("Deleting a beer... id= " + beerId.toString());
+        Beer beer = beerRepository.findById(beerId).orElseThrow(NotFoundException::new);
+        beerRepository.delete(beer);
     }
 
     @Override
