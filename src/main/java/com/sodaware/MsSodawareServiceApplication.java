@@ -1,13 +1,13 @@
-package com.micro.msscbreweryservice;
+package com.sodaware;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MsscBreweryServiceApplication {
+public class MsSodawareServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MsscBreweryServiceApplication.class, args);
+        SpringApplication.run(MsSodawareServiceApplication.class, args);
     }
 
 }

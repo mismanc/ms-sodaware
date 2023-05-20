@@ -1,4 +1,4 @@
-package com.micro.msscbreweryservice.web.util;
+package com.sodaware.web.util;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;

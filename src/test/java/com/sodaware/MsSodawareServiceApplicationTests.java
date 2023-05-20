@@ -1,10 +1,10 @@
-package com.micro.msscbreweryservice;
+package com.sodaware;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MsscBreweryServiceApplicationTests {
+class MsSodawareServiceApplicationTests {
 
     @Test
     void contextLoads() {

@@ -1,4 +1,4 @@
-package com.micro.msscbreweryservice.web.domain;
+package com.sodaware.web.domain;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Beer {
+public class Soda {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -34,8 +34,8 @@ public class Beer {
     @UpdateTimestamp
     private Timestamp lastModifiedDate;
 
-    private String beerName;
-    private String beerStyle;
+    private String sodaName;
+    private String sodaStyle;
 
     @Column(unique = true)
     private Long upc;

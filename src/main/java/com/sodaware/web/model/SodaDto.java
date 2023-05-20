@@ -1,4 +1,4 @@
-package com.micro.msscbreweryservice.web.model;
+package com.sodaware.web.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -19,15 +19,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BeerDto {
+public class SodaDto {
 
     private UUID id;
 
     @NotBlank
-    private String beerName;
+    private String sodaName;
 
     @NotNull
-    private BeerStyle beerStyle;
+    private SodaStyle sodaStyle;
 
     @Null
     private Integer version;

@@ -1,4 +1,4 @@
-package com.micro.msscbreweryservice.web.controller;
+package com.sodaware.web.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

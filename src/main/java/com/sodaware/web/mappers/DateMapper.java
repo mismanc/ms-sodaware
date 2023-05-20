@@ -1,4 +1,4 @@
-package com.micro.msscbreweryservice.web.mappers;
+package com.sodaware.web.mappers;
 
 import org.springframework.stereotype.Component;
 
