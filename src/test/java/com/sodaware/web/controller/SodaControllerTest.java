@@ -47,7 +47,7 @@ class SodaControllerTest {
     }
 
     @Test
-    void updateBeer() throws Exception {
+    void updateSoda() throws Exception {
         SodaDto sodaDto = getSodaDto();
         String sodaDtoJson = objectMapper.writeValueAsString(sodaDto);
 

@@ -38,7 +38,7 @@ public class SodaController {
 
 
     @GetMapping("/{sodaId}")
-    public ResponseEntity<SodaDto> getBeer(@PathVariable UUID sodaId) {
+    public ResponseEntity<SodaDto> getSoda(@PathVariable UUID sodaId) {
         return new ResponseEntity<>(sodaService.getSodaById(sodaId), HttpStatus.OK);
     }
 
@@ -46,20 +46,20 @@ public class SodaController {
     public ResponseEntity<SodaDto> saveSoda(@RequestBody @Validated SodaDto sodaDto) {
         SodaDto newSoda = sodaService.saveSoda(sodaDto);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", "api/v1/beer/" + newSoda.getId().toString());
+        headers.add("Location", "api/v1/soda/" + newSoda.getId().toString());
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<SodaDto> updateBeer(@RequestBody @Validated SodaDto sodaDto) {
+    public ResponseEntity<SodaDto> updateSoda(@RequestBody @Validated SodaDto sodaDto) {
         sodaService.updateSoda(sodaDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/{beerId}")
+    @DeleteMapping("/{sodaId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteBeer(@PathVariable UUID beerId) {
-        sodaService.deleteSodaById(beerId);
+    public void deleteSoda(@PathVariable UUID sodaId) {
+        sodaService.deleteSodaById(sodaId);
     }
 
 }
