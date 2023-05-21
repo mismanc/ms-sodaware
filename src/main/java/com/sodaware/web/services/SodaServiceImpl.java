@@ -8,11 +8,13 @@ import com.sodaware.web.repository.SodaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -52,6 +54,8 @@ public class SodaServiceImpl implements SodaService {
 
     @Override
     public Page<SodaDto> getAllSodas(Pageable pageable) {
-        return null;
+        Page<Soda> sodaPage = sodaRepository.findAll(pageable);
+        return new PageImpl<>(sodaPage.stream().map(sodaMapper::sodaToSodaDto).collect(Collectors.toList()), pageable,
+                sodaPage.getTotalElements());
     }
 }
