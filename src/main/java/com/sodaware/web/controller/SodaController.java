@@ -32,17 +32,18 @@ public class SodaController {
     public ResponseEntity<Page<SodaDto>> getAllSodas(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
                                                      @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder,
                                                      @RequestParam(value = "sodaName", required = false) String sodaName,
+                                                     @RequestParam(value = "showInventoryOnHand", required = false, defaultValue = "false") Boolean showInventoryOnHand,
                                                      @RequestParam(value = "sodaStyle", required = false) SodaStyle sodaStyle) {
 
-        Page<SodaDto> sodaDtosPage = sodaService.getAllSodas(sodaName, sodaStyle, pageable);
+        Page<SodaDto> sodaDtosPage = sodaService.getAllSodas(sodaName, sodaStyle, showInventoryOnHand, pageable);
         HttpHeaders headers = HeaderUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), sodaDtosPage);
         return ResponseEntity.ok().headers(headers).body(sodaDtosPage);
     }
 
 
     @GetMapping("/{sodaId}")
-    public ResponseEntity<SodaDto> getSoda(@PathVariable UUID sodaId) {
-        return new ResponseEntity<>(sodaService.getSodaById(sodaId), HttpStatus.OK);
+    public ResponseEntity<SodaDto> getSoda(@PathVariable UUID sodaId, @RequestParam(value = "showInventoryOnHand", required = false, defaultValue = "false") Boolean showInventoryOnHand) {
+        return new ResponseEntity<>(sodaService.getSodaById(sodaId, showInventoryOnHand), HttpStatus.OK);
     }
 
     @PostMapping

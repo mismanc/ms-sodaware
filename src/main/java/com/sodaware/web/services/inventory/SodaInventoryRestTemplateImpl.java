@@ -33,10 +33,21 @@ public class SodaInventoryRestTemplateImpl implements SodaInventoryService {
 
     @Override
     public Integer getOnHandInventory(UUID sodaId) {
-        ResponseEntity<List<SodaInventoryDto>> responseEntity = restTemplate.exchange(serviceHost + INVENTORY_PATH,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<>() {}, sodaId);
+        ResponseEntity<List<SodaInventoryDto>> responseEntity;
+        try {
+            responseEntity = restTemplate.exchange(serviceHost + INVENTORY_PATH,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<>() {
+                    }, sodaId);
+        } catch (Exception e) {
+            return 0;
+        }
+
+
+        if (responseEntity.getStatusCodeValue() != 200) {
+            return 0;
+        }
 
         Integer totalOnHand = Objects.requireNonNull(responseEntity.getBody()).stream().mapToInt(SodaInventoryDto::getQuantityOnHand).sum();
         return totalOnHand;

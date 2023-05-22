@@ -13,4 +13,5 @@ public interface SodaMapper {
 
     Soda sodaDtoToSoda(SodaDto sodaDto);
 
+    SodaDto sodaToSodaDtoWithInventory(Soda soda);
 }

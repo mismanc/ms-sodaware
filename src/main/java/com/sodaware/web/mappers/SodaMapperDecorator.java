@@ -27,9 +27,13 @@ public abstract class SodaMapperDecorator implements SodaMapper {
 
     @Override
     public SodaDto sodaToSodaDto(Soda soda) {
+        return sodaMapper.sodaToSodaDto(soda);
+    }
+
+    @Override
+    public SodaDto sodaToSodaDtoWithInventory(Soda soda) {
         SodaDto dto = sodaMapper.sodaToSodaDto(soda);
         dto.setQuantityOnHand(sodaInventoryService.getOnHandInventory(soda.getId()));
-        System.out.println(dto);
         return dto;
     }
 }

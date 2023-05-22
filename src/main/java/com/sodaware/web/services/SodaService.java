@@ -11,11 +11,11 @@ import java.util.UUID;
 public interface SodaService {
     SodaDto saveSoda(SodaDto sodaDto);
 
-    SodaDto getSodaById(UUID sodaId);
+    SodaDto getSodaById(UUID sodaId, Boolean showInventoryOnHand);
 
     SodaDto updateSoda(SodaDto sodaDto);
 
     void deleteSodaById(UUID sodaId);
 
-    Page<SodaDto> getAllSodas(String sodaName, SodaStyle sodaStyle, Pageable pageable);
+    Page<SodaDto> getAllSodas(String sodaName, SodaStyle sodaStyle, Boolean showInventoryOnHand, Pageable pageable);
 }

@@ -31,8 +31,12 @@ public class SodaServiceImpl implements SodaService {
     }
 
     @Override
-    public SodaDto getSodaById(UUID sodaId) {
-        return sodaMapper.sodaToSodaDto(sodaRepository.findById(sodaId).orElseThrow(NotFoundException::new));
+    public SodaDto getSodaById(UUID sodaId, Boolean showInventoryOnHand) {
+        Soda soda = sodaRepository.findById(sodaId).orElseThrow(NotFoundException::new);
+        if (showInventoryOnHand) {
+            return sodaMapper.sodaToSodaDtoWithInventory(soda);
+        }
+        return sodaMapper.sodaToSodaDto(soda);
     }
 
     @Override
@@ -53,7 +57,7 @@ public class SodaServiceImpl implements SodaService {
     }
 
     @Override
-    public Page<SodaDto> getAllSodas(String sodaName, SodaStyle sodaStyle, Pageable pageable) {
+    public Page<SodaDto> getAllSodas(String sodaName, SodaStyle sodaStyle, Boolean showInventoryOnHand, Pageable pageable) {
         Page<Soda> sodaPage;
         if (!StringUtils.isEmpty(sodaName) && sodaStyle != null) {
             sodaPage = sodaRepository.findAllBySodaNameAndSodaStyle(sodaName, sodaStyle, pageable);
@@ -64,7 +68,11 @@ public class SodaServiceImpl implements SodaService {
         } else {
             sodaPage = sodaRepository.findAll(pageable);
         }
-        return new PageImpl<>(sodaPage.stream().map(sodaMapper::sodaToSodaDto).collect(Collectors.toList()), pageable,
+        if (!showInventoryOnHand) {
+            return new PageImpl<>(sodaPage.stream().map(sodaMapper::sodaToSodaDto).collect(Collectors.toList()), pageable,
+                    sodaPage.getTotalElements());
+        }
+        return new PageImpl<>(sodaPage.stream().map(sodaMapper::sodaToSodaDtoWithInventory).collect(Collectors.toList()), pageable,
                 sodaPage.getTotalElements());
     }
 }
