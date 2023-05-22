@@ -4,14 +4,15 @@ import com.sodaware.web.controller.NotFoundException;
 import com.sodaware.web.domain.Soda;
 import com.sodaware.web.mappers.SodaMapper;
 import com.sodaware.web.model.SodaDto;
+import com.sodaware.web.model.SodaStyle;
 import com.sodaware.web.repository.SodaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -30,7 +31,6 @@ public class SodaServiceImpl implements SodaService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public SodaDto getSodaById(UUID sodaId) {
         return sodaMapper.sodaToSodaDto(sodaRepository.findById(sodaId).orElseThrow(NotFoundException::new));
     }
@@ -39,7 +39,7 @@ public class SodaServiceImpl implements SodaService {
     public SodaDto updateSoda(SodaDto sodaDto) {
         Soda soda = sodaRepository.findById(sodaDto.getId()).orElseThrow(NotFoundException::new);
         soda.setSodaName(sodaDto.getSodaName());
-        soda.setSodaStyle(sodaDto.getSodaStyle().name());
+        soda.setSodaStyle(sodaDto.getSodaStyle());
         soda.setPrice(sodaDto.getPrice());
         soda.setUpc(sodaDto.getUpc());
         return sodaMapper.sodaToSodaDto(sodaRepository.save(soda));
@@ -53,8 +53,17 @@ public class SodaServiceImpl implements SodaService {
     }
 
     @Override
-    public Page<SodaDto> getAllSodas(Pageable pageable) {
-        Page<Soda> sodaPage = sodaRepository.findAll(pageable);
+    public Page<SodaDto> getAllSodas(String sodaName, SodaStyle sodaStyle, Pageable pageable) {
+        Page<Soda> sodaPage;
+        if (!StringUtils.isEmpty(sodaName) && sodaStyle != null) {
+            sodaPage = sodaRepository.findAllBySodaNameAndSodaStyle(sodaName, sodaStyle, pageable);
+        } else if (!StringUtils.isEmpty(sodaName) && sodaStyle == null) {
+            sodaPage = sodaRepository.findAllBySodaName(sodaName, pageable);
+        } else if (StringUtils.isEmpty(sodaName) && sodaStyle != null) {
+            sodaPage = sodaRepository.findAllBySodaStyle(sodaStyle, pageable);
+        } else {
+            sodaPage = sodaRepository.findAll(pageable);
+        }
         return new PageImpl<>(sodaPage.stream().map(sodaMapper::sodaToSodaDto).collect(Collectors.toList()), pageable,
                 sodaPage.getTotalElements());
     }

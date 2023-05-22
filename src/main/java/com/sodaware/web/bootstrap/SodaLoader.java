@@ -1,6 +1,7 @@
 package com.sodaware.web.bootstrap;
 
 import com.sodaware.web.domain.Soda;
+import com.sodaware.web.model.SodaStyle;
 import com.sodaware.web.repository.SodaRepository;
 import org.springframework.boot.CommandLineRunner;
 
@@ -23,14 +24,14 @@ public class SodaLoader implements CommandLineRunner {
     private void loadSodaObjects() {
         if (sodaRepository.count() == 0) {
             sodaRepository.save(Soda.builder()
-                    .sodaName("Kızılay").sodaStyle("LEMON")
+                    .sodaName("Kızılay").sodaStyle(SodaStyle.LEMON)
                     .quantityToWare(200).minOnHand(11)
                     .upc(3370100000L)
                     .price(new BigDecimal("12.99"))
                     .build());
 
             sodaRepository.save(Soda.builder()
-                    .sodaName("Beypazarı").sodaStyle("SIMPLE")
+                    .sodaName("Beypazarı").sodaStyle(SodaStyle.SIMPLE)
                     .quantityToWare(200).minOnHand(12)
                     .upc(3370100001L)
                     .price(new BigDecimal("11.99"))

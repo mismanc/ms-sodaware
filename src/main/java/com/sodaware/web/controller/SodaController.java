@@ -1,6 +1,7 @@
 package com.sodaware.web.controller;
 
 import com.sodaware.web.model.SodaDto;
+import com.sodaware.web.model.SodaStyle;
 import com.sodaware.web.services.SodaService;
 import com.sodaware.web.util.HeaderUtil;
 import org.springframework.data.domain.Page;
@@ -29,9 +30,11 @@ public class SodaController {
 
     @GetMapping
     public ResponseEntity<Page<SodaDto>> getAllSodas(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
-                                                     @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder) {
+                                                     @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder,
+                                                     @RequestParam(value = "sodaName", required = false) String sodaName,
+                                                     @RequestParam(value = "sodaStyle", required = false) SodaStyle sodaStyle) {
 
-        Page<SodaDto> sodaDtosPage = sodaService.getAllSodas(pageable);
+        Page<SodaDto> sodaDtosPage = sodaService.getAllSodas(sodaName, sodaStyle, pageable);
         HttpHeaders headers = HeaderUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), sodaDtosPage);
         return ResponseEntity.ok().headers(headers).body(sodaDtosPage);
     }

@@ -2,6 +2,7 @@ package com.sodaware.web.services;
 
 
 import com.sodaware.web.model.SodaDto;
+import com.sodaware.web.model.SodaStyle;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,5 +17,5 @@ public interface SodaService {
 
     void deleteSodaById(UUID sodaId);
 
-    Page<SodaDto> getAllSodas(Pageable pageable);
+    Page<SodaDto> getAllSodas(String sodaName, SodaStyle sodaStyle, Pageable pageable);
 }

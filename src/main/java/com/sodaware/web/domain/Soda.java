@@ -1,8 +1,10 @@
 package com.sodaware.web.domain;
 
+import com.sodaware.web.model.SodaStyle;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -22,6 +24,7 @@ public class Soda {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(length = 36, columnDefinition = "varchar", nullable = false, updatable = false)
+    @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID id;
 
     @Version
@@ -35,7 +38,9 @@ public class Soda {
     private Timestamp lastModifiedDate;
 
     private String sodaName;
-    private String sodaStyle;
+
+    @Enumerated(EnumType.STRING)
+    private SodaStyle sodaStyle;
 
     @Column(unique = true)
     private Long upc;
