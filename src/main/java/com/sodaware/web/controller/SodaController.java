@@ -46,6 +46,11 @@ public class SodaController {
         return new ResponseEntity<>(sodaService.getSodaById(sodaId, showInventoryOnHand), HttpStatus.OK);
     }
 
+    @GetMapping("/upc/{upc}")
+    public ResponseEntity<SodaDto> getSoda(@PathVariable Long upc) {
+        return new ResponseEntity<>(sodaService.getSodaByUpc(upc), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<SodaDto> saveSoda(@RequestBody @Validated SodaDto sodaDto) {
         SodaDto newSoda = sodaService.saveSoda(sodaDto);

@@ -18,4 +18,6 @@ public interface SodaService {
     void deleteSodaById(UUID sodaId);
 
     Page<SodaDto> getAllSodas(String sodaName, SodaStyle sodaStyle, Boolean showInventoryOnHand, Pageable pageable);
+
+    SodaDto getSodaByUpc(Long upc);
 }

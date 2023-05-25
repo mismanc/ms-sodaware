@@ -9,6 +9,7 @@ import com.sodaware.web.repository.SodaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -30,12 +31,22 @@ public class SodaServiceImpl implements SodaService {
         return sodaMapper.sodaToSodaDto(sodaRepository.save(sodaMapper.sodaDtoToSoda(sodaDto)));
     }
 
+    @Cacheable(cacheNames = "sodaCache", key = "#sodaId", condition = "#showInventoryOnHand == false")
     @Override
     public SodaDto getSodaById(UUID sodaId, Boolean showInventoryOnHand) {
+        System.out.println("Called getSodaById");
         Soda soda = sodaRepository.findById(sodaId).orElseThrow(NotFoundException::new);
         if (showInventoryOnHand) {
             return sodaMapper.sodaToSodaDtoWithInventory(soda);
         }
+        return sodaMapper.sodaToSodaDto(soda);
+    }
+
+    @Cacheable(cacheNames = "sodaCacheUpc", key = "#upc")
+    @Override
+    public SodaDto getSodaByUpc(Long upc) {
+        System.out.println("Called getSodaByUpc");
+        Soda soda = sodaRepository.findByUpc(upc).orElseThrow(NotFoundException::new);
         return sodaMapper.sodaToSodaDto(soda);
     }
 
@@ -56,8 +67,12 @@ public class SodaServiceImpl implements SodaService {
         sodaRepository.delete(soda);
     }
 
+    @Cacheable(cacheNames = "sodaListCache", condition = "#showInventoryOnHand == false")
     @Override
     public Page<SodaDto> getAllSodas(String sodaName, SodaStyle sodaStyle, Boolean showInventoryOnHand, Pageable pageable) {
+
+        System.out.println("Called getAllSodas");
+
         Page<Soda> sodaPage;
         if (!StringUtils.isEmpty(sodaName) && sodaStyle != null) {
             sodaPage = sodaRepository.findAllBySodaNameAndSodaStyle(sodaName, sodaStyle, pageable);
