@@ -1,0 +1,23 @@
+spring:
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+  sql:
+    init:
+      mode: always
+  datasource:
+    username: application
+    password: '123app*.'
+    url: jdbc:postgresql://localhost:5432/sodaware
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    defer-datasource-initialization:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+soda:
+  inventory:
+    service-host=http://localhost:8082
+
