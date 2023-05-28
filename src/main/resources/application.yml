@@ -9,15 +9,24 @@ spring:
     username: application
     password: '123app*.'
     url: jdbc:postgresql://localhost:5432/sodaware
+    hikari:
+      maximum-pool-size: 7
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 1792
+        useServerPrepStmts: true
   jpa:
     database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    defer-datasource-initialization:
+    defer-datasource-initialization: true
     show-sql: true
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 soda:
   inventory:
-    service-host=http://localhost:8082
+    service-host: http://localhost:8082
 
