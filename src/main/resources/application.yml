@@ -28,7 +28,13 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+    com:
+      sodaware: debug
 soda:
   inventory:
     service-host: http://localhost:8082

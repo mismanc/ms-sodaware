@@ -1,4 +1,4 @@
-package com.sodaware.web.services;
+package com.sodaware.web.services.filling;
 
 import com.sodaware.web.config.JMSConfig;
 import com.sodaware.web.domain.Soda;
