@@ -1,4 +1,4 @@
-package com.sodaware.web.events;
+package com.ms.soda.events;
 
 import com.sodaware.web.model.SodaDto;
 import lombok.AllArgsConstructor;

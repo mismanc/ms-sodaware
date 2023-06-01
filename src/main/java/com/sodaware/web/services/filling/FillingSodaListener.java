@@ -1,10 +1,10 @@
 package com.sodaware.web.services.filling;
 
+import com.ms.soda.events.FillSodaEvent;
+import com.ms.soda.events.NewInventoryEvent;
 import com.sodaware.web.config.JMSConfig;
 import com.sodaware.web.controller.NotFoundException;
 import com.sodaware.web.domain.Soda;
-import com.sodaware.web.events.FillSodaEvent;
-import com.sodaware.web.events.NewInventoryEvent;
 import com.sodaware.web.model.SodaDto;
 import com.sodaware.web.repository.SodaRepository;
 import lombok.RequiredArgsConstructor;

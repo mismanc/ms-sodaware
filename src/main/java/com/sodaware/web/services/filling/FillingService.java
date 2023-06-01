@@ -1,8 +1,8 @@
 package com.sodaware.web.services.filling;
 
+import com.ms.soda.events.FillSodaEvent;
 import com.sodaware.web.config.JMSConfig;
 import com.sodaware.web.domain.Soda;
-import com.sodaware.web.events.FillSodaEvent;
 import com.sodaware.web.mappers.SodaMapper;
 import com.sodaware.web.repository.SodaRepository;
 import com.sodaware.web.services.inventory.SodaInventoryService;
