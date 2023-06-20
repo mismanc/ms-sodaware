@@ -1,6 +1,6 @@
 package com.ms.soda.events;
 
-import com.sodaware.web.model.SodaDto;
+import com.ms.soda.model.SodaDto;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor

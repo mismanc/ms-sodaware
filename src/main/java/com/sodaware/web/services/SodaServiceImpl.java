@@ -1,10 +1,10 @@
 package com.sodaware.web.services;
 
+import com.ms.soda.model.SodaDto;
+import com.ms.soda.model.SodaStyle;
 import com.sodaware.web.controller.NotFoundException;
 import com.sodaware.web.domain.Soda;
 import com.sodaware.web.mappers.SodaMapper;
-import com.sodaware.web.model.SodaDto;
-import com.sodaware.web.model.SodaStyle;
 import com.sodaware.web.repository.SodaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,8 +1,8 @@
 package com.sodaware.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sodaware.web.model.SodaDto;
-import com.sodaware.web.model.SodaStyle;
+import com.ms.soda.model.SodaDto;
+import com.ms.soda.model.SodaStyle;
 import com.sodaware.web.services.SodaService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.sodaware.web.controller;
 
-import com.sodaware.web.model.SodaDto;
-import com.sodaware.web.model.SodaStyle;
+import com.ms.soda.model.SodaDto;
+import com.ms.soda.model.SodaStyle;
 import com.sodaware.web.services.SodaService;
 import com.sodaware.web.util.HeaderUtil;
 import org.springframework.data.domain.Page;

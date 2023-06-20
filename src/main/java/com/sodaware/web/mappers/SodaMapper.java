@@ -1,7 +1,7 @@
 package com.sodaware.web.mappers;
 
+import com.ms.soda.model.SodaDto;
 import com.sodaware.web.domain.Soda;
-import com.sodaware.web.model.SodaDto;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 

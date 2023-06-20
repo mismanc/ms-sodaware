@@ -1,4 +1,4 @@
-package com.sodaware.web.model;
+package com.ms.soda.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;

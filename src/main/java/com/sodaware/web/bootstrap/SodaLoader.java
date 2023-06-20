@@ -1,7 +1,7 @@
 package com.sodaware.web.bootstrap;
 
+import com.ms.soda.model.SodaStyle;
 import com.sodaware.web.domain.Soda;
-import com.sodaware.web.model.SodaStyle;
 import com.sodaware.web.repository.SodaRepository;
 import org.springframework.boot.CommandLineRunner;
 

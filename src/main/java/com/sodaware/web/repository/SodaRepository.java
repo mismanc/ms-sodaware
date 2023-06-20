@@ -1,7 +1,7 @@
 package com.sodaware.web.repository;
 
+import com.ms.soda.model.SodaStyle;
 import com.sodaware.web.domain.Soda;
-import com.sodaware.web.model.SodaStyle;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

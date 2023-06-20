@@ -1,8 +1,8 @@
 package com.sodaware.web.services;
 
 
-import com.sodaware.web.model.SodaDto;
-import com.sodaware.web.model.SodaStyle;
+import com.ms.soda.model.SodaDto;
+import com.ms.soda.model.SodaStyle;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

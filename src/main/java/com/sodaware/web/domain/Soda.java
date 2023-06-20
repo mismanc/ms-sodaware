@@ -1,6 +1,6 @@
 package com.sodaware.web.domain;
 
-import com.sodaware.web.model.SodaStyle;
+import com.ms.soda.model.SodaStyle;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
