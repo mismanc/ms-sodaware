@@ -10,6 +10,9 @@ import org.springframework.jms.support.converter.MessageType;
 @Configuration
 public class JMSConfig {
 
+    public static final String VALIDATE_ORDER_QUEUE= "validate-order";
+    public static final String VALIDATE_ORDER_RESPONSE_QUEUE= "validate-order-response";
+
     public static final String FILLING_REQUEST_QUEUE= "filling-request";
     public static final String NEW_INVENTORY_QUEUE = "new-inventory-request";
 
