@@ -3,6 +3,7 @@ package com.sodaware.web.services.inventory;
 import com.sodaware.web.services.inventory.model.SodaInventoryDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +17,10 @@ import java.util.UUID;
 @Slf4j
 @ConfigurationProperties(prefix = "soda.inventory", ignoreUnknownFields = false)
 @Service
+@Profile("!local-discovery")
 public class SodaInventoryRestTemplateImpl implements SodaInventoryService {
 
-    private final String INVENTORY_PATH = "/api/v1/soda/{sodaId}/inventory";
+    public static final String INVENTORY_PATH = "/api/v1/soda/{sodaId}/inventory";
     private final RestTemplate restTemplate;
 
     private String serviceHost;
