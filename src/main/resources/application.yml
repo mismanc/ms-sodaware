@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: soda-service
   artemis:
     password: simetraehcapa
     user: artemis
