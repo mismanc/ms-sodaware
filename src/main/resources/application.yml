@@ -1,4 +1,7 @@
 spring:
+  cloud:
+    config:
+      enabled: false
   application:
     name: soda-service
   artemis:
