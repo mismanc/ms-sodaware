@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  jms:
+    image: vromero/activemq-artemis
+    ports:
+      - "8161:8161"
+      - "61616:61616"
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+  eureka:
+    build:
+      context: /Users/c.misman/IdeaProjects/ms-eureka
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+  config-server:
+    build:
+      context: /Users/c.misman/IdeaProjects/ms-config-server
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://netflix:eureka@eureka:8761/eureka/
+  inventory-service:
+    build:
+      context: /Users/c.misman/IdeaProjects/ms-soda-inventory
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka
+      - config-server
+      - jms
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://netflix:eureka@eureka:8761/eureka/
+      SPRING_ACTIVEMQ_BROKER_URL: tcp://jms:61616
+      SPRING_PROFILES_ACTIVE: local-discovery
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/sodaorder
